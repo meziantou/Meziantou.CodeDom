@@ -266,6 +266,96 @@ namespace Meziantou.CodeDom
             }
         }
 
+        protected virtual void Write(IndentedTextWriter writer, CodeFieldDeclaration member)
+        {
+            Write(writer, member.CustomAttributes);
+            Write(writer, member.Modifiers);
+            if (member.Type == null)
+            {
+                writer.Write("var ");
+            }
+            else
+            {
+                Write(writer, member.Type);
+                writer.Write(" ");
+            }
+
+            WriteIdentifier(writer, member.Name);
+
+            if (member.InitExpression != null)
+            {
+                writer.Write(" = ");
+                Write(writer, member.InitExpression);
+            }
+
+            writer.WriteLine(";");
+        }
+        
+        protected virtual void Write(IndentedTextWriter writer, CodeEventFieldDeclaration member)
+        {
+            Write(writer, member.CustomAttributes);
+            Write(writer, member.Modifiers);
+            writer.Write("event ");
+            if (member.Type == null)
+            {
+                writer.Write("var ");
+            }
+            else
+            {
+                Write(writer, member.Type);
+                writer.Write(" ");
+            }
+
+            WriteIdentifier(writer, member.Name);
+            writer.WriteLine(";");
+        }
+
+        protected virtual void Write(IndentedTextWriter writer, CodeConstructorDeclaration member)
+        {
+            Write(writer, member.CustomAttributes);
+            Write(writer, member.Modifiers);
+
+            var name = member.ParentType?.Name ?? member.Name;
+            if (name != null)
+            {
+                WriteIdentifier(writer, name);
+            }
+
+            writer.Write("(");
+            Write(writer, member.Arguments);
+            writer.Write(")");
+            writer.WriteLine();
+            WriteStatementsOrEmptyBlock(writer, member.Statements);
+        }
+
+        protected virtual void Write(IndentedTextWriter writer, CodePropertyDeclaration member)
+        {
+            Write(writer, member.CustomAttributes);
+            Write(writer, member.Modifiers);
+            Write(writer, member.Type);
+            writer.Write(" ");
+            WriteIdentifier(writer, member.Name);
+
+            writer.WriteLine();
+            writer.WriteLine("{");
+            writer.Indent++;
+
+            if (member.Getter != null)
+            {
+                writer.WriteLine("get");
+                WriteStatementsOrEmptyBlock(writer, member.Getter);
+            }
+
+            if (member.Setter != null)
+            {
+                writer.WriteLine("set");
+                WriteStatementsOrEmptyBlock(writer, member.Setter);
+            }
+
+            writer.Indent--;
+            writer.WriteLine("}");
+        }
+
         protected virtual void Write(IndentedTextWriter writer, CodeTypeReference reference)
         {
             string name = reference.ClrFullTypeName;
@@ -418,22 +508,18 @@ namespace Meziantou.CodeDom
                     break;
 
                 case CodeFieldDeclaration o:
-                    // TODO
                     Write(writer, o);
                     break;
 
                 case CodeConstructorDeclaration o:
-                    // TODO
                     Write(writer, o);
                     break;
 
                 case CodePropertyDeclaration o:
-                    // TODO
                     Write(writer, o);
                     break;
 
                 case CodeEventFieldDeclaration o:
-                    // TODO
                     Write(writer, o);
                     break;
 

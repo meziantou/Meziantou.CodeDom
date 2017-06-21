@@ -18,5 +18,7 @@ namespace Meziantou.CodeDom
         }
 
         public Modifiers Modifiers { get; set; }
+
+        public CodeTypeDeclaration ParentType => Parent.GetSelfOrParentOfType<CodeTypeDeclaration>();
     }
 }
