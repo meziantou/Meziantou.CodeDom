@@ -56,9 +56,18 @@ namespace Meziantou.CodeDom
                     Write(writer, o);
                     break;
 
+                case CodeSnippetStatement o:
+                    Write(writer, o);
+                    break;
+
                 default:
                     throw new NotSupportedException();
             }
+        }
+
+        protected virtual void Write(IndentedTextWriter writer, CodeSnippetStatement statement)
+        {
+            writer.WriteLine(statement.Statement);
         }
 
         protected virtual void Write(IndentedTextWriter writer, CodeGotoNextLoopIterationStatement statement)
