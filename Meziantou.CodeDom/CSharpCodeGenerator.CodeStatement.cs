@@ -60,8 +60,26 @@ namespace Meziantou.CodeDom
                     Write(writer, o);
                     break;
 
+                case CodeTryCatchFinallyStatement o:
+                    Write(writer, o);
+                    break;
+
                 default:
                     throw new NotSupportedException();
+            }
+        }
+
+        protected virtual void Write(IndentedTextWriter writer, CodeTryCatchFinallyStatement statement)
+        {
+            writer.WriteLine("try");
+            WriteStatementsOrEmptyBlock(writer, statement.Try);
+
+            Write(writer, statement.Catch);
+
+            if (statement.Finally != null)
+            {
+                writer.WriteLine("finally");
+                Write(writer, statement.Finally);
             }
         }
 

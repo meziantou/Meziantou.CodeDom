@@ -107,6 +107,14 @@ namespace Meziantou.CodeDom
                     Write(writer, o);
                     break;
 
+                case CodeCatchClauseCollection o:
+                    Write(writer, o);
+                    break;
+
+                case CodeCatchClause o:
+                    Write(writer, o);
+                    break;
+
                 default:
                     throw new NotSupportedException();
             }
@@ -267,13 +275,6 @@ namespace Meziantou.CodeDom
             }
 
             writer.Write(name);
-        }
-
-        protected virtual void Write(IndentedTextWriter writer, CodeUsingDirective usingDirective)
-        {
-            writer.Write("using ");
-            writer.Write(usingDirective.Namespace);
-            writer.Write(";");
         }
 
         protected virtual void Write(IndentedTextWriter writer, CodeClassDeclaration type)
@@ -452,6 +453,37 @@ namespace Meziantou.CodeDom
                 default:
                     throw new NotSupportedException();
             }
+        }
+
+        protected virtual void Write(IndentedTextWriter writer, CodeUsingDirective usingDirective)
+        {
+            writer.Write("using ");
+            writer.Write(usingDirective.Namespace);
+            writer.Write(";");
+        }
+
+        protected virtual void Write(IndentedTextWriter writer, CodeCatchClause catchClause)
+        {
+            writer.Write("catch");
+            if (catchClause.ExceptionType != null)
+            {
+                writer.Write(" (");
+                Write(writer, catchClause.ExceptionType);
+                if (!string.IsNullOrEmpty(catchClause.ExceptionVariableName))
+                {
+                    writer.Write(" ");
+                    writer.Write(catchClause.ExceptionVariableName);
+                }
+                writer.Write(")");
+            }
+            writer.WriteLine();
+
+            WriteStatementsOrEmptyBlock(writer, catchClause.Body);
+        }
+
+        protected virtual void Write(IndentedTextWriter writer, CodeCatchClauseCollection clauses)
+        {
+            Write(writer, clauses, "");
         }
 
         protected virtual string Write(BinaryOperator op)
