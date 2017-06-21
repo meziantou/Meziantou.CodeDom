@@ -36,6 +36,10 @@ namespace Meziantou.CodeDom
                     Write(writer, o);
                     break;
 
+                case CodeWhileStatement o:
+                    Write(writer, o);
+                    break;
+
                 default:
                     throw new NotSupportedException();
             }
@@ -119,6 +123,16 @@ namespace Meziantou.CodeDom
             }
 
             writer.WriteLine(";");
+        }
+
+        protected virtual void Write(IndentedTextWriter writer, CodeWhileStatement statement)
+        {
+            writer.Write("while (");
+            Write(writer, statement.Condition);
+            writer.Write(")");
+            writer.WriteLine();
+
+            WriteStatementsOrEmptyBlock(writer, statement.Body);
         }
     }
 }
