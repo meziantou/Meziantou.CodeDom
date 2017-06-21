@@ -40,9 +40,35 @@ namespace Meziantou.CodeDom
                     Write(writer, o);
                     break;
 
+                case CodeIterationStatement o:
+                    Write(writer, o);
+                    break;
+
+                case CodeExpressionCollectionStatement o:
+                    Write(writer, o);
+                    break;
+
+                case CodeGotoNextLoopIterationStatement o:
+                    Write(writer, o);
+                    break;
+
+                case CodeExitLoopStatement o:
+                    Write(writer, o);
+                    break;
+
                 default:
                     throw new NotSupportedException();
             }
+        }
+
+        protected virtual void Write(IndentedTextWriter writer, CodeGotoNextLoopIterationStatement statement)
+        {
+            writer.WriteLine("continue;");
+        }
+
+        protected virtual void Write(IndentedTextWriter writer, CodeExitLoopStatement statement)
+        {
+            writer.WriteLine("break;");
         }
 
         protected virtual void Write(IndentedTextWriter writer, CodeReturnStatement statement)
@@ -133,6 +159,24 @@ namespace Meziantou.CodeDom
             writer.WriteLine();
 
             WriteStatementsOrEmptyBlock(writer, statement.Body);
+        }
+
+        protected virtual void Write(IndentedTextWriter writer, CodeIterationStatement statement)
+        {
+            writer.Write("for (");
+            Write(writer, statement.Initialization);
+            writer.Write("; ");
+            Write(writer, statement.Condition);
+            writer.Write("; ");
+            Write(writer, statement.IncrementStatement);
+            writer.Write(")");
+            writer.WriteLine();
+            WriteStatementsOrEmptyBlock(writer, statement.Body);
+        }
+
+        protected virtual void Write(IndentedTextWriter writer, CodeExpressionCollectionStatement statement)
+        {
+            Write(writer, statement, ", ");
         }
     }
 }
