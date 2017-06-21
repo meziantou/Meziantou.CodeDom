@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26606.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meziantou.CodeDom", "Meziantou.CodeDom\Meziantou.CodeDom.csproj", "{E3B58547-CB15-4B86-A465-F5D0845B824D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "Sample\Sample.csproj", "{8524B6DB-CAE1-475C-8C2C-5FC44D972A99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3B58547-CB15-4B86-A465-F5D0845B824D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3B58547-CB15-4B86-A465-F5D0845B824D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3B58547-CB15-4B86-A465-F5D0845B824D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3B58547-CB15-4B86-A465-F5D0845B824D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8524B6DB-CAE1-475C-8C2C-5FC44D972A99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8524B6DB-CAE1-475C-8C2C-5FC44D972A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8524B6DB-CAE1-475C-8C2C-5FC44D972A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8524B6DB-CAE1-475C-8C2C-5FC44D972A99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
