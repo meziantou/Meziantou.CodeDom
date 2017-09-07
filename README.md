@@ -1,6 +1,8 @@
 # Meziantou.CodeDom
 
-`Meziantou.CodeDom` is a code generator for C#. It is much easier to use than `System.CodeDom`.
+`Meziantou.CodeDom` is a language agnostic code generator. It is a nice replacement for the old `System.CodeDom`. Indeed `System.CodeDom` has not evolved for years.
+
+`Meziantou.CodeDom` supports most of the modern syntaxes of C#. It also provides nice implicit converters, so your code remain understandable.
 
 The following code:
 ````
