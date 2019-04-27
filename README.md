@@ -1,3 +1,5 @@
+> The code moved to <https://github.com/meziantou/Meziantou.Framework>
+
 # Meziantou.CodeDom
 
 `Meziantou.CodeDom` is a language agnostic code generator. It is a nice replacement for the old `System.CodeDom`. Indeed `System.CodeDom` has not evolved for years.
